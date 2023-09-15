@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>currency conveter</title>
+</head>
+<body>
+<h1>welcome to currency converter</h1>
+<form>
+<label>from :</label><br>
+<input type="text" id="have"> <br>
+<label>to :</label><br>
+<input type="text" id="want"><br>
+<label> amount :</label><br>
+<input type="text" id="amount"><br>
+<button type ="submit" id ="submit">convert</button>
+</form>
+<p>old currency : <span id="old1_currenc3y"></span></p>
+<p>New currency : <span id="new_currency"></span></p>
+<p>New Amount : <span id="new_amount"></span></p>
+<p>old Amount : <span id="old_amount"></span></p>
+<script>
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '6731dc6497mshbc9a2200c1776c1p18a905jsn6fafbc934f50',
+		'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+	}
+};
+
+
+const currencyconverter = (have, want, amount) => {
+	fetch('https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have='+have+'&want='+want+'&amount='+amount,options)
+    .then(response => response.json())
+	.then(data => {console.log(data)
+		old1_currenc3y.innerHTML = data.old_currency
+		new_currency.innerHTML = data.new_currency
+		new_amount.innerHTML = data.new_amount
+		old_amount.innerHTML = data.old_amount
+		
+		})}
+		
+		submit.addEventListener("click", (e) =>{
+		e.preventDefault()
+		currencyconverter(have.value, want.value, amount.value)
+		})
+		currencyconverter("USD", "INR", 100000)
+	</script>
+		</body>
+		</html>
